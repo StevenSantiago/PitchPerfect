@@ -13,8 +13,8 @@ class RecordSoundsVC: UIViewController, AVAudioRecorderDelegate {
     
     var audioRecorder: AVAudioRecorder!
     //Used for configureUI
-    let RECORDING = true
-    let NOT_RECORDING = false
+    let recording = true
+    let notRecording = false
     
     @IBOutlet weak var recordingLabel: UILabel!
     @IBOutlet weak var recordButton: UIButton!
@@ -27,7 +27,7 @@ class RecordSoundsVC: UIViewController, AVAudioRecorderDelegate {
     
     
     @IBAction func recordAudio(_ sender: UIButton) {
-        configureUI(RECORDING)
+        configureUI(recording)
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0] as String
         let recordingName = "recordedVoice.wav"
         let pathArray = [dirPath, recordingName]
@@ -47,7 +47,7 @@ class RecordSoundsVC: UIViewController, AVAudioRecorderDelegate {
         
     }
     @IBAction func stopRecording(_ sender: UIButton) {
-        configureUI(NOT_RECORDING)
+        configureUI(notRecording)
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
@@ -60,7 +60,7 @@ class RecordSoundsVC: UIViewController, AVAudioRecorderDelegate {
             // Will add alert to user(Code snippet modified from PlaySoundsVC+Audio.swift
             let alert = UIAlertController(title: "Alert", message: "Recording not succesful", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)
         }
     }
     
