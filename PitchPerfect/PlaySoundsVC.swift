@@ -32,7 +32,7 @@ class PlaySoundsVC: UIViewController {
         switch(ButtonType(rawValue: sender.tag)!) {
         case .slow:
             playSound(rate: 0.5)
-        case .fast:
+         case .fast:
             playSound(rate: 1.5)
         case .chipmunk:
             playSound(pitch: 1000)
@@ -51,9 +51,13 @@ class PlaySoundsVC: UIViewController {
         stopAudio()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupAudio()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupAudio()
         configureUI(.notPlaying)
     }
     

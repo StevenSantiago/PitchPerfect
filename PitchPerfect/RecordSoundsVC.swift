@@ -57,23 +57,18 @@ class RecordSoundsVC: UIViewController, AVAudioRecorderDelegate {
         if flag {
         performSegue(withIdentifier: "stopRecording", sender: audioRecorder.url)
         } else {
-            print("recording was not succesful")
+            // Will add alert to user(Code snippet modified from PlaySoundsVC+Audio.swift
+            let alert = UIAlertController(title: "Alert", message: "Recording not succesful", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
+    
     func configureUI(_ recordState: Bool) {
-        switch(recordState) {
-        case RECORDING:
-            recordButton.isEnabled = false
-            stopRecordButton.isEnabled = true
-            recordingLabel.text = "Recording in Progress"
-        case NOT_RECORDING:
-            recordButton.isEnabled = true
-            stopRecordButton.isEnabled = false
-            recordingLabel.text = "Tap to Record"
-        default:
-            print("Invalid recordState")
-        }
+        recordButton.isEnabled = !recordState //if recordState is true then recordButton.isEnabled = false(!true)
+        stopRecordButton.isEnabled = recordState
+        recordingLabel.text = recordState ? "Recording in Progress" : "Tap to Record"
     }
     
 
